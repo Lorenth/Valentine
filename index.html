@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Will you be my valentine?</title>
+		<link rel="stylesheet" href="index.css" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet" />
+	</head>
+	<body>
+		<div class="container">
+			<div class="Mainprompt">
+				<img class="image" src="images/youAndMe.gif" />
+				<div class="text">
+					<h1 class="title" id="name">Привіт моя кицюнька</h1>
+					<p class="description" id="question">Will you be my <b>Valentine</b> today?</p>
+				</div>
+				<div class="buttons">
+					<button class="button yes" onclick="showMessage('Yes')" id="yesButton">Так</button>
+					<button class="button no" id="no-button" onclick="showMessage('No')">Ні</button>
+				</div>
+			</div>
+		</div>
+
+		<script>
+			const button = document.getElementById('no-button');
+
+			// Add event listener for mouseenter event
+			button.addEventListener('mouseenter', function () {
+				showMessage('No');
+			});
+
+			function showMessage(response) {
+				if (response === 'No') {
+					const noButton = document.getElementById('no-button');
+					const container = document.querySelector('.container');
+					const maxWidth = window.innerWidth - noButton.offsetWidth;
+					const maxHeight = window.innerHeight - noButton.offsetHeight;
+
+					noButton.style.position = 'absolute';
+
+					document.getElementsByClassName('image')[0].src = 'images/zrada.png';
+
+					const randomX = Math.max(0, Math.floor(Math.random() * maxWidth));
+					const randomY = Math.max(0, Math.floor(Math.random() * maxHeight));
+
+					noButton.style.left = randomX + 'px';
+					noButton.style.top = randomY + 'px';
+
+					document.getElementById('question').textContent = 'Пупсік, на скользкую дорожку хочеш вийті?';
+					document.getElementById('name').style.display = 'none';
+				}
+
+				if (response === 'Yes') {
+					document.getElementById('name').remove();
+					document.getElementById('no-button').remove();
+
+					const yesMessage = document.getElementById('question');
+					yesMessage.textContent = 'Love you so-so  ♡';
+					yesMessage.style.display = 'block';
+					yesMessage.style.fontStyle = 'normal';
+					yesMessage.style.fontSize = '40px';
+					document.getElementsByClassName('image')[0].src = 'images/02.jpg';
+
+					document.getElementById('yesButton').remove();
+				}
+			}
+		</script>
+	</body>
+</html>
